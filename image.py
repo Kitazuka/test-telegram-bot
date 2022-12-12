@@ -4,10 +4,9 @@ from bs4 import BeautifulSoup
 
 AVAILABLE_TIMEFRAMES = ["5m", "15m", "1h", "4h", "1d", "1w", "1M"]
 URL = "https://paper-trader.frwd.one/"
-PAIR = "BTCUSDT"
 
 
-def get_image_url():
+def get_image_url(pair: str) -> str:
     timeframe = AVAILABLE_TIMEFRAMES[
         random.randint(0, len(AVAILABLE_TIMEFRAMES) - 1)
     ]
@@ -17,7 +16,7 @@ def get_image_url():
     stop_loss = str(random.randint(1, 100))
 
     data = {
-        "pair": PAIR,
+        "pair": pair,
         "timeframe": timeframe,
         "candles": candles,
         "ma": ma_periods,

@@ -29,12 +29,31 @@ def welcome(message):
 
 
 @bot.message_handler(content_types=["text"])
+def commands(message):
+    if message.text == "Generate random graphic":
+        pm = bot.send_message(
+            message.chat.id, "Pick the trading pair (for example: BTCUSDT)"
+        )
+        bot.register_next_step_handler(pm, send_image)
+    else:
+        bot.send_message(message.chat.id, "Incorrect command")
+
+
 def send_image(message):
-    if message.chat.type == "private":
-        if message.text == "Generate random graphic":
-            bot.send_photo(message.chat.id, get_image_url())
-        else:
-            bot.send_message(message.chat.id, "Incorrect command")
+    pair = message.text
+    try:
+        photo_url = get_image_url(pair)
+        bot.send_photo(message.chat.id, photo_url)
+    except AttributeError:
+        pm = bot.send_message(
+            message.chat.id,
+            (
+                "Incorrect pair, "
+                "pick another trading pair "
+                "(for example: BTCUSDT)"
+            ),
+        )
+        bot.register_next_step_handler(pm, send_image)
 
 
 bot.polling(none_stop=True)
