@@ -12,8 +12,6 @@ python telegram_bot.py
 
 You can use this test bot:
 
-TOKEN = 5957099141:AAEHaE7FaPJ_j5N8AIRBOADv51yKsy1UCBk
-
 https://t.me/Paper_trade_random_bot
 
 # Demo
